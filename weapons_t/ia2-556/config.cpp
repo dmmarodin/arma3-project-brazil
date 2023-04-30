@@ -15,6 +15,7 @@ class MuzzleSlot_556;
 class CowsSlot_Rail;
 class PointerSlot_Rail;
 class UnderBarrelSlot_rail;
+class UnderBarrelSlot;
 
 class CfgWeapons
 {
@@ -54,18 +55,18 @@ class CfgWeapons
 		magazineReloadSwitchPhase=0.47999999;
 		htMin=8;
 		htMax=920;
-		inertia=0.5;
-		aimTransitionSpeed=1.1;
-		dexterity=1.5;
-		initSpeed=800;
+		inertia=0.80000001;
+		aimTransitionSpeed=0.69999999;
+		dexterity=1.2;
+		initSpeed=900;
 		recoil="recoil_spar";
 		discreteDistance[] = {150, 250};
 		discreteDistanceInitIndex = 0;
 		discreteDistanceCameraPoint[] = {"OP_eye0", "OP_eye1"};
 		cameraDir = "OP_look";
 		maxZeroing=250;
-		distanceZoomMin=0;
-		distanceZoomMax=150;
+		distanceZoomMin=300;
+		distanceZoomMax=300;
 		cartridgePos = "nabojnicestart";
 		cartridgeVel = "nabojniceend";
 		deployedPivot = "bipod";
@@ -93,8 +94,9 @@ class CfgWeapons
 			{
 				iconPosition[]={0.2,0.80000001};
 				iconScale=0.30000001;
+				linkProxy = "\a3\Data_f_Mark\proxies\weapon_slots\underbarrel";
 			};
-			mass=140;
+			mass=79;
 		};
 
 		bullet1[]=
@@ -213,6 +215,9 @@ class CfgWeapons
 		{
 			"Single",
 			"FullAuto",
+			"single_close_optics1",
+			"single_medium_optics1",
+			"single_far_optics1"
 		};
 
 		drySound[]=
@@ -269,15 +274,15 @@ class CfgWeapons
 			};
 
 			reloadTime=0.07;
-			dispersion=0.00116;
 			recoil="recoil_single_mk20";
 			recoilProne="recoil_single_prone_mk20";
+			dispersion=0.00057999999;
 			minRange=2;
-			minRangeProbab=0.5;
-			midRange=150;
+			minRangeProbab=0.30000001;
+			midRange=350;
 			midRangeProbab=0.69999999;
-			maxRange=300;
-			maxRangeProbab=0.2;
+			maxRange=500;
+			maxRangeProbab=0.050000001;
 		};
 		class FullAuto: Mode_FullAuto
 		{
@@ -309,17 +314,56 @@ class CfgWeapons
 				begin2[] = { "A3\sounds_f\weapons\ebr\silencer_mk18_02", db-1, 1, 200 };
 				soundBegin[] = { begin1, 0.5, begin2, 0.5 };
 			};
-			reloadTime=0.07;
-			dispersion=0.00116;
+			reloadTime=0.093;
 			recoil="recoil_auto_mk20";
 			recoilProne="recoil_auto_prone_mk20";
+			dispersion=0.00057999999;
 			minRange=2;
-			minRangeProbab=0.89999998;
-			midRange=15;
+			minRangeProbab=0.30000001;
+			midRange=350;
 			midRangeProbab=0.69999999;
-			maxRange=30;
-			maxRangeProbab=0.1;
+			maxRange=500;
+			maxRangeProbab=0.050000001;
 			aiRateOfFire=1e-006;
+		};
+
+		class single_close_optics1: Single
+		{
+			requiredOpticType=1;
+			showToPlayer=0;
+			minRange=2;
+			minRangeProbab=0.050000001;
+			midRange=300;
+			midRangeProbab=0.80000001;
+			maxRange=500;
+			maxRangeProbab=0.0099999998;
+			aiRateOfFire=2;
+			aiRateOfFireDistance=300;
+		};
+
+		class single_medium_optics1: single_close_optics1
+		{
+			minRange=300;
+			minRangeProbab=0.050000001;
+			midRange=500;
+			midRangeProbab=0.69999999;
+			maxRange=700;
+			maxRangeProbab=0.050000001;
+			aiRateOfFire=2;
+			aiRateOfFireDistance=500;
+		};
+
+		class single_far_optics1: single_medium_optics1
+		{
+			requiredOpticType=2;
+			minRange=300;
+			minRangeProbab=0.050000001;
+			midRange=600;
+			midRangeProbab=0.40000001;
+			maxRange=900;
+			maxRangeProbab=0.050000001;
+			aiRateOfFire=4;
+			aiRateOfFireDistance=600;
 		};
 
 		class GunParticles : GunParticles
@@ -349,7 +393,13 @@ class CfgWeapons
 
 		class WeaponSlotsInfo: WeaponSlotsInfo
 		{
-			mass = 100;
+			class UnderBarrelSlot: UnderBarrelSlot
+			{
+				iconPosition[]={0.2,0.80000001};
+				iconScale=0.30000001;
+				linkProxy = "\a3\Data_f_Mark\proxies\weapon_slots\underbarrel";
+			};
+			mass = 74.9;
 		};
 	};
 };
